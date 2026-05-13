@@ -668,42 +668,215 @@
 
   .dash-cap{margin-top:28px;text-align:center;font-style:italic;color:var(--text-dim);font-size:21px;max-width:760px;margin-left:auto;margin-right:auto}
 
-  /* ───────── SCENE 10 NETSUITE ───────── */
-  .ns-grid{display:grid;grid-template-columns: 1fr 1.05fr 1fr; gap: 24px; align-items:stretch}
-  @media(max-width:1000px){.ns-grid{grid-template-columns:1fr}}
-  .ns-card{padding:28px;display:flex;flex-direction:column;gap:14px;min-height:340px}
-  .ns-card .logo{
-    width:42px;height:42px;border-radius:8px;
-    background:var(--surface-hi);border:1px solid var(--border);
-    display:flex;align-items:center;justify-content:center;
-    font-family:var(--display);font-weight:900;font-size:21px;color:var(--text)
+  /* ───────── SCENE 11 NETSUITE — bridge redesign ───────── */
+  .ns-grid{
+    display: grid;
+    grid-template-columns: 1fr 2.4fr 1fr;
+    gap: 0;
+    align-items: stretch;
+    position: relative;
   }
-  .ns-card .logo.shop{color:#95BF47}
-  .ns-card .logo.nets{color:#125B86}
-  .ns-card h5{font-family:var(--display);font-weight:900;font-size:24px;letter-spacing:-.01em;margin:0;color:var(--text)}
-  .ns-card ul{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:10px}
-  .ns-card li{color:var(--text-dim);font-size:17px;padding-left:14px;position:relative}
-  .ns-card li::before{content:"·";position:absolute;left:0;color:var(--text-muted)}
+  .ns-anchor,
+  .ns-bridge{
+    padding: 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    position: relative;
+    z-index: 1;
+  }
+  .ns-anchor{ min-height: 340px; }
+  .ns-anchor.left{
+    border-right: 0;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+  .ns-anchor.right{
+    border-left: 0;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+  .ns-bridge{
+    background: var(--surface-hi);
+    border-left: 0;
+    border-right: 0;
+    border-radius: 0;
+    gap: 10px;
+  }
+  .ns-anchor .ns-eyebrow,
+  .ns-bridge .ns-bridge-eyebrow{
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin: 0;
+  }
+  .ns-anchor .ns-eyebrow{ color: var(--text-muted); }
+  .ns-bridge .ns-bridge-eyebrow{ color: var(--lime); }
+  .ns-anchor h5,
+  .ns-bridge h5{
+    font-family: var(--display);
+    font-weight: 900;
+    letter-spacing: -0.01em;
+    margin: 2px 0 0;
+    color: var(--text);
+  }
+  .ns-anchor h5{ font-size: 24px; }
+  .ns-bridge h5{ font-size: 22px; font-weight: 800; }
+  .ns-anchor .ns-role{
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--lime);
+    margin: 6px 0 2px;
+  }
+  .ns-bridge-sub{
+    font-size: 14px;
+    line-height: 1.5;
+    color: var(--text-dim);
+    margin: 2px 0 10px;
+    max-width: 560px;
+  }
+  .ns-anchor ul{
+    list-style: none;
+    padding: 0;
+    margin: 4px 0 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .ns-anchor li{
+    font-size: 15px;
+    line-height: 1.45;
+    color: var(--text);
+    padding-left: 14px;
+    position: relative;
+  }
+  .ns-anchor li::before{
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 9px;
+    width: 6px;
+    height: 1.5px;
+    background: var(--lime);
+  }
 
-  .ns-bridge{padding: 22px; display:flex;flex-direction:column;gap:12px;background:var(--surface-hi)}
-  .ns-bridge .eb{font-family:var(--mono);font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--text-muted);margin-bottom:6px}
   .ns-packet{
-    border:1px solid var(--border);
-    border-radius:10px; padding: 14px 16px;
-    display:flex;align-items:center;justify-content:space-between;
-    background:var(--surface);
-    font-family:var(--mono);font-size:15px;color:var(--text-dim);letter-spacing:.02em;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 12px 16px;
+    background: var(--surface);
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: 14px;
   }
+  .ns-pkt-label{
+    font-family: var(--display);
+    font-weight: 600;
+    font-size: 15px;
+    letter-spacing: -0.005em;
+    color: var(--text);
+  }
+  .ns-pkt-trail{
+    height: 1px;
+    background: linear-gradient(to right, var(--border) 0%, var(--border-hi) 100%);
+    position: relative;
+  }
+  .ns-pkt-trail::after{
+    content: "";
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 3px 0 3px 4px;
+    border-color: transparent transparent transparent var(--border-hi);
+  }
+  .ns-pkt-tag{
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    padding: 4px 10px;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    background: var(--bg);
+    white-space: nowrap;
+  }
+
   .ns-packet.special{
     background: var(--lime);
-    color:#FFFFFF;
-    border-color:var(--lime);
-    font-weight:500;
+    border-color: var(--lime);
+    margin: 4px -8px;
+    padding: 16px 18px;
+    grid-template-rows: auto auto;
   }
-  .ns-packet .tag{font-size:12px;letter-spacing:.1em;text-transform:uppercase;opacity:.7}
-  .ns-packet.special .tag{opacity:1;font-weight:500}
+  .ns-packet.special .ns-pkt-label{
+    color: #FFFFFF;
+    font-weight: 700;
+    font-size: 16px;
+  }
+  .ns-packet.special .ns-pkt-trail{
+    background: linear-gradient(to right, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0.75) 100%);
+  }
+  .ns-packet.special .ns-pkt-trail::after{
+    border-color: transparent transparent transparent rgba(255,255,255,0.85);
+  }
+  .ns-packet.special .ns-pkt-tag{
+    color: var(--lime);
+    background: #FFFFFF;
+    border-color: #FFFFFF;
+    font-weight: 600;
+  }
+  .ns-pkt-owner{
+    grid-column: 1 / -1;
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.78);
+    margin-top: 2px;
+  }
 
-  .ns-foot{margin-top:32px;color:var(--text-dim);font-style:italic;max-width:900px;font-size:20px}
+  .ns-flow-cue{
+    display: none;
+    justify-self: center;
+    font-family: var(--mono);
+    font-size: 16px;
+    color: var(--text-muted);
+    padding: 4px 0;
+  }
+
+  @media (max-width: 1024px){
+    .ns-grid{
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+    .ns-anchor.left,
+    .ns-anchor.right,
+    .ns-bridge{
+      border: 1px solid var(--border);
+      border-radius: 12px;
+    }
+    .ns-flow-cue{ display: block; }
+  }
+  @media (max-width: 700px){
+    .ns-packet{
+      grid-template-columns: 1fr;
+      gap: 6px;
+    }
+    .ns-pkt-trail{ display: none; }
+    .ns-pkt-tag{ justify-self: start; }
+    .ns-packet.special{ margin: 4px 0; }
+  }
+
+  .ns-foot{margin-top:36px;color:var(--text-dim);font-style:italic;max-width:900px;font-size:20px}
 
   /* ───────── SCENE 11 AI DIVIDER ───────── */
   .ai-divider{
@@ -1895,6 +2068,11 @@
         </ul>
       </div>
     </div>
+
+    <div class="card b2b-callout" style="margin-top:36px">
+      <span class="b2b-callout-label">FULLY CUSTOMIZABLE</span>
+      The tier structure shown is a sample. Number of tiers, tier names, discount percentages, eligibility rules, and per-SKU markup overrides are all configurable from the admin. We&rsquo;ll set the initial structure with MidCom during Blueprint — your team adjusts anytime after that, no code required.
+    </div>
   </div>
 </section>
 
@@ -2069,10 +2247,11 @@
     <p class="lead" style="margin-bottom:48px">Triggered after fulfillment — not before. Your operations team gets structured records that match how you actually work.</p>
 
     <div class="ns-grid">
-      <div class="card ns-card">
-        <div class="logo shop">S</div>
+
+      <div class="card ns-anchor left">
+        <div class="ns-eyebrow">STOREFRONT · SOURCE</div>
         <h5>Shopify Plus</h5>
-        <div class="dim" style="font-size:15px;font-family:var(--mono);text-transform:uppercase;letter-spacing:.06em">SOURCE</div>
+        <div class="ns-role">SENDS</div>
         <ul>
           <li>Orders</li>
           <li>Customer records</li>
@@ -2081,18 +2260,42 @@
         </ul>
       </div>
 
+      <div class="ns-flow-cue" aria-hidden="true">&darr;</div>
+
       <div class="card ns-bridge">
-        <div class="eb">THE BRIDGE</div>
-        <div class="ns-packet"><span>Order Data</span><span class="tag">JSON · 200ms</span></div>
-        <div class="ns-packet"><span>Customer Records</span><span class="tag">JSON · 200ms</span></div>
-        <div class="ns-packet"><span>Invoice / Job Records</span><span class="tag">JSON · 200ms</span></div>
-        <div class="ns-packet special"><span>Line-Item Margin Data ★</span><span class="tag">THE DIFFERENTIATOR</span></div>
+        <div class="ns-bridge-eyebrow">THE BRIDGE · BUILT BY IT-GEEKS</div>
+        <h5>Custom data conduit</h5>
+        <p class="ns-bridge-sub">Every record that crosses gets validated, structured, and timestamped before NetSuite sees it.</p>
+
+        <div class="ns-packet">
+          <span class="ns-pkt-label">Order Data</span>
+          <span class="ns-pkt-trail" aria-hidden="true"></span>
+          <span class="ns-pkt-tag">JSON &middot; 200MS</span>
+        </div>
+        <div class="ns-packet">
+          <span class="ns-pkt-label">Customer Records</span>
+          <span class="ns-pkt-trail" aria-hidden="true"></span>
+          <span class="ns-pkt-tag">JSON &middot; 200MS</span>
+        </div>
+        <div class="ns-packet">
+          <span class="ns-pkt-label">Invoice / Job Records</span>
+          <span class="ns-pkt-trail" aria-hidden="true"></span>
+          <span class="ns-pkt-tag">JSON &middot; 200MS</span>
+        </div>
+        <div class="ns-packet special">
+          <span class="ns-pkt-label">Line-Item Margin Data</span>
+          <span class="ns-pkt-trail" aria-hidden="true"></span>
+          <span class="ns-pkt-tag">THE DIFFERENTIATOR</span>
+          <span class="ns-pkt-owner">BUILT BY IT-GEEKS &middot; NOT IN STANDARD CONNECTORS</span>
+        </div>
       </div>
 
-      <div class="card ns-card">
-        <div class="logo nets">N</div>
+      <div class="ns-flow-cue" aria-hidden="true">&darr;</div>
+
+      <div class="card ns-anchor right">
+        <div class="ns-eyebrow">ERP &middot; LEDGER</div>
         <h5>NetSuite</h5>
-        <div class="dim" style="font-size:15px;font-family:var(--mono);text-transform:uppercase;letter-spacing:.06em">LEDGER</div>
+        <div class="ns-role">RECEIVES</div>
         <ul>
           <li>Contacts &amp; billing</li>
           <li>Invoices &amp; jobs</li>
@@ -2100,9 +2303,10 @@
           <li>Product records</li>
         </ul>
       </div>
+
     </div>
 
-    <p class="ns-foot">Standard connectors don&rsquo;t carry margin data. Ours will — built for how MidCom actually operates.</p>
+    <p class="ns-foot">Standard connectors don&rsquo;t carry margin data. Ours does &mdash; built for how MidCom actually operates.</p>
   </div>
 </section>
 
@@ -2505,6 +2709,15 @@
     gsap.set(ql, {y:'100%', opacity:0, display:'inline-block'});
     gsap.to(ql, {y:'0%', opacity:1, duration:0.8, stagger:0.15, ease:E,
       scrollTrigger:{trigger:'#painQuote', start:'top 75%', once:true}
+    });
+  }
+
+  // ───── NetSuite bridge packet stagger
+  const nsPackets = document.querySelectorAll('.ns-bridge .ns-packet');
+  if (nsPackets.length && !reduced){
+    gsap.from(nsPackets, {
+      x: -20, opacity: 0, duration: 0.55, stagger: 0.1, ease: E,
+      scrollTrigger:{trigger:'.ns-bridge', start:'top 75%', once:true}
     });
   }
 
